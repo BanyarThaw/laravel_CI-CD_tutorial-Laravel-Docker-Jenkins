@@ -57,6 +57,7 @@ pipeline {
         }
     }
     post {
+        /*
         success {
             sh 'cd "/var/lib/jenkins/workspace/LaravelTest"'
             sh 'rm -rf artifact.zip'
@@ -74,7 +75,7 @@ pipeline {
                     }
                 }
             }                                  
-        }
+        } */
         always {
             sh 'docker compose down --remove-orphans -v'
             sh 'docker compose ps'
