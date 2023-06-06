@@ -16,7 +16,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./:/var/www/html:delegated
+      - ./:/var/www/html/Projects/Laravel/knowledge/laravel-docker-boilerplate:delegated
     depends_on:
       - php
       - redis
@@ -52,7 +52,7 @@ services:
         - USER=${USER:-youruser}
     container_name: php
     volumes:
-      - ./:/var/www/html:delegated
+      - ./:/var/www/html/Projects/Laravel/knowledge/laravel-docker-boilerplate:delegated
     networks:
       - laravel
 
@@ -75,8 +75,8 @@ services:
         - USER=${USER:-youruser}
     container_name: composer
     volumes:
-      - ./:/var/www/html
-    working_dir: /var/www/html
+      - ./:/var/www/html/Projects/Laravel/knowledge/laravel-docker-boilerplate
+    working_dir: /var/www/html/Projects/Laravel/knowledge/laravel-docker-boilerplate
     depends_on:
       - php
     user: ${USER:-youruser}
@@ -88,11 +88,11 @@ services:
     image: node:13.7
     container_name: npm
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/html/Projects/Laravel/knowledge/laravel-docker-boilerplate
     ports:
       - 3000:3000
       - 3001:3001
-    working_dir: /var/www/html
+    working_dir: /var/www/html/Projects/Laravel/knowledge/laravel-docker-boilerplate
     entrypoint: ['npm']
     networks:
       - laravel
@@ -107,11 +107,11 @@ services:
         - USER=${USER:-youruser}
     container_name: artisan
     volumes:
-      - ./:/var/www/html:delegated
+      - ./:/var/www/html/Projects/Laravel/knowledge/laravel-docker-boilerplate:delegated
     depends_on:
       - mysql
-    working_dir: /var/www/html
-    entrypoint: ['php', '/var/www/html/artisan']
+    working_dir: /var/www/html/Projects/Laravel/knowledge/laravel-docker-boilerplate
+    entrypoint: ['php', '/var/www/html/Projects/Laravel/knowledge/laravel-docker-boilerplate/artisan']
     networks:
       - laravel
 
