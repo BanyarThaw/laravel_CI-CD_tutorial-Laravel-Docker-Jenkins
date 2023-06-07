@@ -46,6 +46,7 @@ pipeline {
         stage("Copy .env file") {
             steps {
                 sh 'cp .env.example .env'
+                sh 'php artisan key:generate'
             }
         }
         /*
