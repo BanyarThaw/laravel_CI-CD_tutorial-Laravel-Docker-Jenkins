@@ -69,18 +69,16 @@ pipeline {
             withCredentials([sshUserPrivateKey(credentialsId: "aws-ec2", keyFileVariable: 'keyfile')]) {
                 sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/lib/jenkins/workspace/LaravelTest/artifact.zip ubuntu@13.212.23.156:/home/ubuntu/artifact'
             }
-            /*
-            sshagent(credentials: ['aws-ec2']) {
-                sh 'ssh -o StrictHostKeyChecking=no ec2-user@13.40.116.143 unzip -o /home/ec2-user/artifact/artifact.zip -d /var/www/html'
+            sshagent(credentials: ['ubuntu']) {
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.212.23.156 unzip -o /home/ubuntu/artifact/artifact.zip -d /var/www/html'
                 script {
                     try {
-                        sh 'ssh -o StrictHostKeyChecking=no ec2-user@13.40.116.143 sudo chmod 777 /var/www/html/storage -R'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.212.23.156 sudo chmod 777 /var/www/html/storage -R'
                     } catch (Exception e) {
                         echo 'Some file permissions could not be updated.'
                     }
                 }
-            }
-            */                                  
+            }                                  
         } 
         always {
             sh 'docker compose down --remove-orphans -v'
