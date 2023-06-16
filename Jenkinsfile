@@ -66,7 +66,7 @@ pipeline {
             sh 'cd "/var/lib/jenkins/workspace/LaravelTest"'
             sh 'rm -rf artifact.zip'
             sh 'zip -r artifact.zip . -x "*node_modules**"'
-            withCredentials([sshUserPrivateKey(credentialsId: "aws-ec2", keyFileVariable: 'keyfile')]) {
+            withCredentials([sshUserPrivateKey(credentialsId: "ubuntu", keyFileVariable: 'keyfile')]) {
                 sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/lib/jenkins/workspace/LaravelTest/artifact.zip ubuntu@13.212.23.156:/home/ubuntu/artifact'
             }
             sshagent(credentials: ['ubuntu']) {
