@@ -69,7 +69,7 @@ pipeline {
             withCredentials([sshUserPrivateKey(credentialsId: "aws-ec2", keyFileVariable: 'keyfile')]) {
                 sh 'scp -v -o StrictHostKeyChecking=no -i ${keyfile} /var/lib/jenkins/workspace/LaravelTest/artifact.zip ubuntu@13.212.23.156:/home/ubuntu/artifact'
             }
-            sshagent(credentials: ['ubuntu']) {
+            sshagent(credentials: ['aws-ec2']) {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@13.212.23.156 unzip -o /home/ubuntu/artifact/artifact.zip -d /var/www/html'
                 script {
                     try {
